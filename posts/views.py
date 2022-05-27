@@ -1,3 +1,18 @@
-from django.shortcuts import render
 
-# Create your views here.
+from rest_framework.generics import ListCreateAPIView, RetrieveUpdateDestroyAPIView
+
+from .models import Post
+from .serializers import PostSerializer
+from .permissions import IsAuthorOrReadOnly
+
+
+class PostList(ListCreateAPIView):
+    queryset = Post.objects.all().order_by("-created_at")
+    serializer_class = PostSerializer
+
+
+class PostDetail(RetrieveUpdateDestroyAPIView):
+    permission_classes = (IsAuthorOrReadOnly,)
+    queryset = Post.objects.all()
+    serializer_class = PostSerializer
+
