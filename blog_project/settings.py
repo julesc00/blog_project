@@ -49,7 +49,13 @@ INSTALLED_APPS = [
 REST_FRAMEWORK = {
     "DEFAULT_PERMISSION_CLASSES": [
         "rest_framework.permissions.IsAuthenticated",
-    ]
+    ],
+    "DEFAULT_AUTHENTICATION_CLASSES": [
+        # Sessions are used to power the Browsable API and the ability to log in and out of it.
+        "rest_framework.authentication.SessionAuthentication",
+        # BasicAuthentication is used to pass the session ID in the HTTP headers for the API itself.
+        "rest_framework.authentication.BasicAuthentication"
+    ],
 }
 
 MIDDLEWARE = [
