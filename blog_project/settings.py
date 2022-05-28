@@ -41,6 +41,8 @@ INSTALLED_APPS = [
 
     # Third-party apps
     "rest_framework",
+    "rest_framework.authtoken",
+    "rest_auth",
 
     # Local app
     "posts.apps.PostsConfig",
@@ -49,7 +51,11 @@ INSTALLED_APPS = [
 REST_FRAMEWORK = {
     "DEFAULT_PERMISSION_CLASSES": [
         "rest_framework.permissions.IsAuthenticated",
-    ]
+    ],
+    "DEFAULT_AUTHENTICATION_CLASSES:": [
+        "rest_framework.authentication.SessionAuthentication",
+        "rest_framework.authentication.TokenAuthentication",
+    ],
 }
 
 MIDDLEWARE = [
